@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions
+package com.example.leagueoflegendschampions.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

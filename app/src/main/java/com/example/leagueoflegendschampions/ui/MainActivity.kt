@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions
+package com.example.leagueoflegendschampions.ui
 
 import android.os.Bundle
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
