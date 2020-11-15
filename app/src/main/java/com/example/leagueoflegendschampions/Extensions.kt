@@ -1,6 +1,8 @@
-package com.example.leagueoflegendschampions.ui
+package com.example.leagueoflegendschampions
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,4 +21,10 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): 
 
 fun ImageView.loadUrl(url: String, override: Int) {
     Glide.with(context).load(url).placeholder(R.drawable.ic_image_not_supported).override(override).into(this)
+}
+inline fun <reified T : Activity> Context.intentFor(body: Intent.() -> Unit): Intent =
+    Intent(this, T::class.java).apply(body)
+
+inline fun <reified T : Activity> Context.startActivity(body: Intent.() -> Unit) {
+    startActivity(intentFor<T>(body))
 }
