@@ -1,5 +1,6 @@
 package com.example.leagueoflegendschampions.module
 
+import com.example.leagueoflegendschampions.BaseURL.API_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,7 +13,7 @@ object LolDb {
     }
 
     val service: LolDbService = Retrofit.Builder()
-        .baseUrl("https://ddragon.leagueoflegends.com/cdn/10.23.1/data/")
+        .baseUrl(API_BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
