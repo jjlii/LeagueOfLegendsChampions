@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.leagueoflegendschampions.BaseURL.IMAGE_BASE_URL
 import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ChampionItemBinding
 import com.example.leagueoflegendschampions.module.Champion
@@ -46,6 +47,7 @@ class ChampionAdapter(private val listener: (Champion)-> Unit )
         fun bind(champion: Champion){
             with(binding){
                 championName.text = champion.name
+                championImage.loadUrl(IMAGE_BASE_URL+champion.image.full, 400)
             }
         }
     }
