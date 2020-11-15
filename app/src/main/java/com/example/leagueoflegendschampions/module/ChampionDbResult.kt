@@ -7,7 +7,7 @@ data class ChampionDbResult (
     val type: String,
     val format: String,
     val version: String,
-    val data: List<Champion>
+    val data: Map<String, Champion>
 )
 
 @Parcelize
