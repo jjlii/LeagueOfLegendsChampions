@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.View
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.LolDb
+import com.example.leagueoflegendschampions.startActivity
 import com.example.leagueoflegendschampions.toast
 import kotlinx.coroutines.launch
 
 class MainActivity : CoroutineScopeActivity() {
 
     private val adapter = ChampionAdapter{
-        toast(it.name)
+        startActivity<DetailActivity>{
+            putExtra(DetailActivity.CHAMPION, it)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

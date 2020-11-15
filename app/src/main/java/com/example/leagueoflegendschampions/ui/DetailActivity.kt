@@ -24,29 +24,29 @@ class DetailActivity : AppCompatActivity() {
         intent.getParcelableExtra<Champion>(CHAMPION)?.run {
             with(binding){
                 championDetailToolbar.title = name
-                championDetailImage.loadUrl(BaseURL.IMAGE_BASE_URL +image.full, 400)
+                championDetailImage.loadUrl(BaseURL.IMAGE_BASE_URL +image.full, 75)
                 championDetailSummary.text = blurb
 
                 championDetailInfo.text = buildSpannedString {
 
-                    bold { append("Title") }
+                    bold { append("Title: ") }
                     appendLine(title)
 
-                    bold { append("Partype") }
-                    append(partype)
+                    bold { append("Partype: ") }
+                    appendLine(partype)
 
-                    bold { append("Info") }
+                    bold { append("Info\n") }
                     appendLine("Attack: " + info.attack)
                     appendLine("Defense: " + info.defense)
                     appendLine("Magic: "+ info.magic)
                     appendLine("Difficulty: "+info.difficulty)
 
-                    bold { append("Tags") }
+                    bold { appendLine("Tags") }
                     tags.forEach {
                         appendLine(it)
                     }
 
-                    bold { append("Stats") }
+                    bold { appendLine("Stats") }
                     appendLine("Hp: " + stats["hp"])
                     appendLine("Hp per level: " + stats["hpperlevel"])
                     appendLine("Mp: "+ stats["mp"])
