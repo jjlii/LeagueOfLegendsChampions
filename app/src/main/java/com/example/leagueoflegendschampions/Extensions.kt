@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.ui
+package com.example.leagueoflegendschampions
 
 import android.content.Context
 import android.view.LayoutInflater

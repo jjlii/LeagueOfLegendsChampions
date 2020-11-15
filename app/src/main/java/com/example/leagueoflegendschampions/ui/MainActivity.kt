@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.LolDb
+import com.example.leagueoflegendschampions.toast
 import kotlinx.coroutines.launch
 
 class MainActivity : CoroutineScopeActivity() {
