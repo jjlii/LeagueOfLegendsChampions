@@ -98,9 +98,10 @@ class MainActivity : CoroutineScopeActivity() {
     }
 
     private fun getLanguage(region : String): String{
-        return languages.firstOrNull{
+        val language = languages.firstOrNull{
             it.contains(region)
         } ?: "en_US"
-
+        toast(language)
+        return language
     }
 }
