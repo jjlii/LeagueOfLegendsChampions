@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.ui
+package com.example.leagueoflegendschampions.ui.main
 
 import android.view.View
 import android.view.ViewGroup

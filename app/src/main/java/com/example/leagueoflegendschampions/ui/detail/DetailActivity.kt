@@ -1,13 +1,13 @@
-package com.example.leagueoflegendschampions.ui
+package com.example.leagueoflegendschampions.ui.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.example.leagueoflegendschampions.ui.commun.BaseURL
 import com.example.leagueoflegendschampions.databinding.ActivityDetailBinding
-import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.module.Champion
+import com.example.leagueoflegendschampions.ui.commun.BaseURL
+import com.example.leagueoflegendschampions.ui.commun.loadUrl
 
 class DetailActivity : AppCompatActivity() {
 
@@ -37,8 +37,8 @@ class DetailActivity : AppCompatActivity() {
                     bold { append("Info\n") }
                     appendLine("Attack: " + info.attack)
                     appendLine("Defense: " + info.defense)
-                    appendLine("Magic: "+ info.magic)
-                    appendLine("Difficulty: "+info.difficulty)
+                    appendLine("Magic: " + info.magic)
+                    appendLine("Difficulty: " + info.difficulty)
 
                     bold { appendLine("Tags") }
                     tags.forEach {
@@ -48,15 +48,15 @@ class DetailActivity : AppCompatActivity() {
                     bold { appendLine("Stats") }
                     appendLine("Hp: " + stats["hp"])
                     appendLine("Hp per level: " + stats["hpperlevel"])
-                    appendLine("Mp: "+ stats["mp"])
-                    appendLine("Mp per level: "+stats["mpperlevel"])
+                    appendLine("Mp: " + stats["mp"])
+                    appendLine("Mp per level: " + stats["mpperlevel"])
                     appendLine("Moves peed: " + stats["movespeed"])
                     appendLine("Armor: " + stats["armor"])
-                    appendLine("Armor per level: "+ stats["armorperlevel"])
-                    appendLine("Spell block: "+stats["spellblock"])
+                    appendLine("Armor per level: " + stats["armorperlevel"])
+                    appendLine("Spell block: " + stats["spellblock"])
                     appendLine("Spell block per level: " + stats["spellblockperlevel"])
                     appendLine("Attack range: " + stats["attackrange"])
-                    appendLine("Attack Speed: "+ stats["attackspeed"])
+                    appendLine("Attack Speed: " + stats["attackspeed"])
 
                 }
             }
