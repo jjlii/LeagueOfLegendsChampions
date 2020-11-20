@@ -1,6 +1,6 @@
 package com.example.leagueoflegendschampions.module
 
-import com.example.leagueoflegendschampions.BaseURL.API_BASE_URL
+import com.example.leagueoflegendschampions.ui.commun.BaseURL.API_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

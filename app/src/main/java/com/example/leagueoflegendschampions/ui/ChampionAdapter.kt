@@ -4,11 +4,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.leagueoflegendschampions.BaseURL.IMAGE_BASE_URL
+import com.example.leagueoflegendschampions.ui.commun.BaseURL.IMAGE_BASE_URL
 import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ChampionItemBinding
-import com.example.leagueoflegendschampions.inflate
-import com.example.leagueoflegendschampions.loadUrl
+import com.example.leagueoflegendschampions.ui.commun.inflate
+import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.module.Champion
 import kotlin.properties.Delegates
 

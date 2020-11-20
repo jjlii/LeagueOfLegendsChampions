@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.example.leagueoflegendschampions.BaseURL
-import com.example.leagueoflegendschampions.R
+import com.example.leagueoflegendschampions.ui.commun.BaseURL
 import com.example.leagueoflegendschampions.databinding.ActivityDetailBinding
-import com.example.leagueoflegendschampions.loadUrl
+import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.module.Champion
 
 class DetailActivity : AppCompatActivity() {

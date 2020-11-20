@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.ChampionRepository
-import com.example.leagueoflegendschampions.startActivity
+import com.example.leagueoflegendschampions.ui.commun.startActivity
 import kotlinx.coroutines.launch
 
 class MainActivity : CoroutineScopeActivity() {
