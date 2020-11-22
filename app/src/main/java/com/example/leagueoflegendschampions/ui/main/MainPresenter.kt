@@ -1,6 +1,5 @@
 package com.example.leagueoflegendschampions.ui.main
 
-import android.view.View
 import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.module.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.Scope
