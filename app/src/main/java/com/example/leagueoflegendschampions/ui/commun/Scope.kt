@@ -1,28 +1,27 @@
 package com.example.leagueoflegendschampions.ui.commun
 
-import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 
-abstract class CoroutineScopeActivity : AppCompatActivity(), CoroutineScope {
+interface Scope : CoroutineScope {
 
-    private lateinit var job: Job
+    var job: Job
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    fun initScope() {
         job = SupervisorJob()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    fun cancelScope() {
         job.cancel()
+    }
+
+    class Impl: Scope{
+        override lateinit var job: Job
     }
 }
