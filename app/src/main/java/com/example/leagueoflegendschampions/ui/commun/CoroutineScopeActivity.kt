@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.ui
+package com.example.leagueoflegendschampions.ui.commun
 
 import android.os.Bundle
 import android.os.PersistableBundle

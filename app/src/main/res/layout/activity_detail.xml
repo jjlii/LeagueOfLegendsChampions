@@ -56,7 +56,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 tools:text="Lorem ipsum" />
 
-            <TextView
+            <com.example.leagueoflegendschampions.ui.detail.ChampionDetailInfoView
                 android:id="@+id/championDetailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
