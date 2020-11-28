@@ -1,50 +1,50 @@
 package com.example.leagueoflegendschampions.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.module.ChampionRepository
 import com.example.leagueoflegendschampions.ui.detail.DetailActivity
 import com.example.leagueoflegendschampions.ui.commun.startActivity
+import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel
+import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*
 
-class MainActivity : AppCompatActivity(), MainPresenter.View {
+class MainActivity : AppCompatActivity(){
 
-    private  val presenter by lazy {  MainPresenter(ChampionRepository(this))}
+    private lateinit var viewModel: MainViewModel
     private lateinit var binding : ActivityMainBinding
+    private lateinit var adapter : ChampionAdapter
 
-    private val adapter = ChampionAdapter {
-        presenter.onChampionClick(it)
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter.onCreate(this)
+        viewModel = ViewModelProvider(this,
+                MainViewModelFactory(ChampionRepository(this)))
+                .get()
+
+        adapter =ChampionAdapter(viewModel::onChampionClick)
         binding.championListView.adapter = adapter
+
+        viewModel.model.observe(this, Observer(::updateUi))
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
-    }
-
-    override fun showProgress() {
-        binding.progress.visibility = android.view.View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        binding.progress.visibility = android.view.View.GONE
-    }
-
-    override fun updateData(champions: List<Champion>) {
-        adapter.championList = champions
-    }
-
-    override fun navigateTo(champion: Champion) {
-        startActivity<DetailActivity> {
-            putExtra(DetailActivity.CHAMPION, champion)
+    private fun updateUi( model: UiModel){
+        if (model !is Loading){
+            binding.progress.visibility = View.GONE
+        }
+        when(model){
+            is Content -> adapter.championList = model.champions
+            is Navigation -> startActivity<DetailActivity>{
+                putExtra(DetailActivity.CHAMPION, model.champion)
+            }
+            is Loading -> binding.progress.visibility = View.VISIBLE
         }
     }
 }
