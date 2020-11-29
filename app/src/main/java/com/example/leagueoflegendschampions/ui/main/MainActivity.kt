@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.leagueoflegendschampions.PermissionRequester
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
+import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.module.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.startActivity
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity(){
         binding.championListView.adapter = adapter
 
         viewModel.model.observe(this, Observer(::updateUi))
+        viewModel.navigation.observe(this, Observer { event->
+            event.getContentIfNotHandled()?.let {
+                startActivity<DetailActivity>{
+                    putExtra(DetailActivity.CHAMPION, it)
+                }
+            }
+        })
     }
 
     private fun updateUi( model: UiModel){
@@ -40,9 +48,6 @@ class MainActivity : AppCompatActivity(){
         }
         when(model){
             is Content -> adapter.championList = model.champions
-            is Navigation -> startActivity<DetailActivity>{
-                putExtra(DetailActivity.CHAMPION, model.champion)
-            }
             is Loading -> binding.progress.visibility = View.VISIBLE
             is RequestLocationPermission -> coarsePermissionRequester.request {
                 viewModel.onCoarsePermissionRequested()
