@@ -9,6 +9,7 @@ import androidx.lifecycle.get
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.module.ChampionRepository
+import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.detail.DetailActivity
 import com.example.leagueoflegendschampions.ui.commun.startActivity
 import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel
@@ -25,9 +26,7 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this,
-                MainViewModelFactory(ChampionRepository(this)))
-                .get()
+        viewModel = getViewModel { MainViewModel(ChampionRepository(this)) }
 
         adapter =ChampionAdapter(viewModel::onChampionClick)
         binding.championListView.adapter = adapter

@@ -18,10 +18,3 @@ class DetailViewModel(private val champion: Champion): ViewModel() {
             return _model
         }
 }
-
-@Suppress("UNCHECKED_CAST")
-class DetailViewModelFactory(private val champion: Champion):
-        ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        DetailViewModel(champion) as T
-}

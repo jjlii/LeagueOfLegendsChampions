@@ -8,6 +8,7 @@ import androidx.lifecycle.get
 import com.example.leagueoflegendschampions.databinding.ActivityDetailBinding
 import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.ui.commun.BaseURL
+import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.ui.detail.DetailViewModel.UiModel
 import java.lang.IllegalStateException
@@ -27,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val champion: Champion =
                 intent.getParcelableExtra<Champion>(CHAMPION)
                         ?: throw IllegalStateException("Champion not found!")
-        viewModel = ViewModelProvider(this, DetailViewModelFactory(champion)).get()
+        viewModel = getViewModel { DetailViewModel(champion) }
 
         viewModel.model.observe(this, Observer(::updateUi))
     }

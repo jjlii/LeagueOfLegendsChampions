@@ -47,11 +47,3 @@ class MainViewModel(private val championRepository: ChampionRepository):
         _model.value = UiModel.Navigation(champion)
     }
 }
-
-@Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(private val championRepository: ChampionRepository):
-    ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        MainViewModel(championRepository) as T
-
-}
