@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.leagueoflegendschampions.module.Champion
 import com.example.leagueoflegendschampions.module.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.Scope
+import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val championRepository: ChampionRepository):
@@ -16,6 +17,7 @@ class MainViewModel(private val championRepository: ChampionRepository):
         object Loading : UiModel()
         class Content(val champions : List<Champion>) : UiModel()
         class Navigation(val champion: Champion) : UiModel()
+        object RequestLocationPermission : UiModel()
     }
 
     private val _model = MutableLiveData<UiModel>()
@@ -30,11 +32,15 @@ class MainViewModel(private val championRepository: ChampionRepository):
         initScope()
     }
 
-    private fun refresh() {
+    private fun refresh(){
+        _model.value = RequestLocationPermission
+    }
+
+    fun onCoarsePermissionRequested() {
         launch {
-            _model.value = UiModel.Loading
+            _model.value = Loading
             val championList = championRepository.getChampions()
-            _model.value = UiModel.Content(championList.data.values.toList())
+            _model.value = Content(championList.data.values.toList())
         }
     }
 
@@ -44,6 +50,6 @@ class MainViewModel(private val championRepository: ChampionRepository):
     }
 
     fun onChampionClick(champion: Champion) {
-        _model.value = UiModel.Navigation(champion)
+        _model.value = Navigation(champion)
     }
 }

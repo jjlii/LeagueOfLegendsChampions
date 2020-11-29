@@ -1,10 +1,11 @@
 package com.example.leagueoflegendschampions.module
 
 import android.app.Activity
+import android.app.Application
 
-class ChampionRepository(activity: Activity) {
+class ChampionRepository(application: Application) {
 
-    private val regionRepository = RegionRepository(activity)
+    private val regionRepository = RegionRepository(application)
 
     suspend fun getChampions() =
             LolDb.service.listChampionsAsync(
