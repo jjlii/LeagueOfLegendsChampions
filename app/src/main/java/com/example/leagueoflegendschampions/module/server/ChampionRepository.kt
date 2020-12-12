@@ -1,7 +1,8 @@
-package com.example.leagueoflegendschampions.module
+package com.example.leagueoflegendschampions.module.server
 
-import android.app.Activity
 import android.app.Application
+import com.example.leagueoflegendschampions.module.Language
+import com.example.leagueoflegendschampions.module.RegionRepository
 
 class ChampionRepository(application: Application) {
 

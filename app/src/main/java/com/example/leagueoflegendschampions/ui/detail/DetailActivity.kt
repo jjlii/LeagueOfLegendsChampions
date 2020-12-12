@@ -3,15 +3,12 @@ package com.example.leagueoflegendschampions.ui.detail
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.leagueoflegendschampions.databinding.ActivityDetailBinding
-import com.example.leagueoflegendschampions.module.Champion
+import com.example.leagueoflegendschampions.module.server.Champion
 import com.example.leagueoflegendschampions.ui.commun.BaseURL
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.ui.detail.DetailViewModel.UiModel
-import java.lang.IllegalStateException
 
 class DetailActivity : AppCompatActivity() {
 
@@ -37,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
             with(binding){
                 val champion = model.champion
                 championDetailToolbar.title = champion.name
-                championDetailImage.loadUrl(BaseURL.IMAGE_BASE_URL +champion.image.full, 75)
+                championDetailImage.loadUrl(BaseURL.SPLASH_BASE_URL + champion.id + "_0.jpg", 500)
                 championDetailSummary.text = champion.blurb
                 championDetailInfo.setChampion(champion)
             }

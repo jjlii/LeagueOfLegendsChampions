@@ -3,8 +3,7 @@ package com.example.leagueoflegendschampions.ui.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.leagueoflegendschampions.module.Champion
+import com.example.leagueoflegendschampions.module.server.Champion
 
 class DetailViewModel(private val champion: Champion): ViewModel() {
 

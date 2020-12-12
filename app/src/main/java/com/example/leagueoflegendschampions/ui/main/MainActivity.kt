@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.leagueoflegendschampions.PermissionRequester
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
-import com.example.leagueoflegendschampions.module.Champion
-import com.example.leagueoflegendschampions.module.ChampionRepository
+import com.example.leagueoflegendschampions.module.server.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.startActivity
 import com.example.leagueoflegendschampions.ui.detail.DetailActivity

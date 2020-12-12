@@ -3,9 +3,8 @@ package com.example.leagueoflegendschampions.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.leagueoflegendschampions.module.Champion
-import com.example.leagueoflegendschampions.module.ChampionRepository
+import com.example.leagueoflegendschampions.module.server.Champion
+import com.example.leagueoflegendschampions.module.server.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.Event
 import com.example.leagueoflegendschampions.ui.commun.Scope
 import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*

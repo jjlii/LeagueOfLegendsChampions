@@ -1,8 +1,7 @@
-package com.example.leagueoflegendschampions.module
+package com.example.leagueoflegendschampions.module.server
 
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface LolDbService {
 
