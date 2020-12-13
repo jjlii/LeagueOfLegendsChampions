@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.bumptech.glide.Glide
 import com.example.leagueoflegendschampions.R
 
@@ -27,4 +31,13 @@ inline fun <reified T : Activity> Context.intentFor(body: Intent.() -> Unit): In
 
 inline fun <reified T : Activity> Context.startActivity(body: Intent.() -> Unit) {
     startActivity(intentFor<T>(body))
+}
+
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : ViewModel> FragmentActivity.getViewModel(crossinline factory: () -> T): T{
+    val vmFactory = object  : ViewModelProvider.Factory{
+        override fun <U : ViewModel?> create(modelClass: Class<U>): U =
+                factory() as U
+    }
+    return ViewModelProvider(this, vmFactory).get()
 }

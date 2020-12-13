@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.module
+package com.example.leagueoflegendschampions.module.server
 
 import com.example.leagueoflegendschampions.ui.commun.BaseURL.API_BASE_URL
 import okhttp3.OkHttpClient

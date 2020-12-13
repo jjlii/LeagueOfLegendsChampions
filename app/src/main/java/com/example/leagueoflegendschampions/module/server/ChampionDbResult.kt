@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.module
+package com.example.leagueoflegendschampions.module.server
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -12,17 +12,17 @@ data class ChampionDbResult (
 
 @Parcelize
 data class Champion(
-    val version: String,
-    val id: String,
-    val key: String,
-    val name: String,
-    val title: String,
-    val blurb: String,
-    val info: Info,
-    val image: Image,
-    val tags: List<String>,
-    val partype: String,
-    val stats: Map<String, Double>
+        val version: String,
+        val id: String,
+        val key: String,
+        val name: String,
+        val title: String,
+        val blurb: String,
+        val info: Info,
+        val image: Image,
+        val tags: List<String>,
+        val partype: String,
+        val stats: Map<String, Double>
 ) : Parcelable
 
 @Parcelize

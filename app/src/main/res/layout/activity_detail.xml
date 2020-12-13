@@ -14,7 +14,7 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="500dp"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -31,7 +31,7 @@
                 android:id="@+id/championDetailToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:title="Champion name" />
+                app:title="Champion name"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
