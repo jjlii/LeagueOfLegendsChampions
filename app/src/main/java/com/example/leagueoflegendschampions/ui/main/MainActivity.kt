@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(){
         viewModel.navigation.observe(this, Observer { event->
             event.getContentIfNotHandled()?.let {
                 startActivity<DetailActivity>{
-                    putExtra(DetailActivity.CHAMPION, it)
+                    putExtra(DetailActivity.CHAMPION, it.id)
                 }
             }
         })

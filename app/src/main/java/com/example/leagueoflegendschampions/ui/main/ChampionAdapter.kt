@@ -9,7 +9,7 @@ import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ChampionItemBinding
 import com.example.leagueoflegendschampions.ui.commun.inflate
 import com.example.leagueoflegendschampions.ui.commun.loadUrl
-import com.example.leagueoflegendschampions.module.server.Champion
+import com.example.leagueoflegendschampions.module.database.Champion
 import kotlin.properties.Delegates
 
 class ChampionAdapter(private val listener: (Champion)-> Unit )
@@ -49,7 +49,7 @@ class ChampionAdapter(private val listener: (Champion)-> Unit )
         fun bind(champion: Champion){
             with(binding){
                 championName.text = champion.name
-                championImage.loadUrl(SQUARE_BASE_URL+champion.image.full, 400)
+                championImage.loadUrl(SQUARE_BASE_URL+champion.square, 400)
             }
         }
     }

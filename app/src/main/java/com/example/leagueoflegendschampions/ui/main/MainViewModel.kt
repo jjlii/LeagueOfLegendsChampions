@@ -2,16 +2,15 @@ package com.example.leagueoflegendschampions.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.leagueoflegendschampions.module.server.Champion
+import com.example.leagueoflegendschampions.module.database.Champion
 import com.example.leagueoflegendschampions.module.server.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.Event
-import com.example.leagueoflegendschampions.ui.commun.Scope
+import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
 import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val championRepository: ChampionRepository):
-    ViewModel(),Scope by Scope.Impl() {
+    ScopedViewModel() {
 
     sealed class UiModel{
         object Loading : UiModel()
@@ -42,7 +41,7 @@ class MainViewModel(private val championRepository: ChampionRepository):
         launch {
             _model.value = Loading
             val championList = championRepository.getChampions()
-            _model.value = Content(championList.data.values.toList())
+            _model.value = Content(championList)
         }
     }
 
