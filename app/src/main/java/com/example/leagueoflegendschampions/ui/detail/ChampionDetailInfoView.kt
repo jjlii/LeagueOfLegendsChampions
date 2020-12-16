@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.example.leagueoflegendschampions.module.server.Champion
+import com.example.leagueoflegendschampions.module.database.Champion
 
 class ChampionDetailInfoView @JvmOverloads constructor(
         context: Context,
@@ -23,10 +23,10 @@ class ChampionDetailInfoView @JvmOverloads constructor(
             appendLine(partype)
 
             bold { append("Info\n") }
-            appendLine("Attack: " + info.attack)
-            appendLine("Defense: " + info.defense)
-            appendLine("Magic: " + info.magic)
-            appendLine("Difficulty: " + info.difficulty)
+            appendLine("Attack: $attack")
+            appendLine("Defense: $defense")
+            appendLine("Magic: $magic")
+            appendLine("Difficulty: $difficulty")
 
             bold { appendLine("Tags") }
             tags.forEach {

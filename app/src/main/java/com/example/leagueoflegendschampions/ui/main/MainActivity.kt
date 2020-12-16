@@ -1,10 +1,12 @@
 package com.example.leagueoflegendschampions.ui.main
 
 import android.Manifest
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.leagueoflegendschampions.ChampionApp
 import com.example.leagueoflegendschampions.PermissionRequester
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
 import com.example.leagueoflegendschampions.module.server.ChampionRepository
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = getViewModel { MainViewModel(ChampionRepository(application)) }
+        viewModel = getViewModel { MainViewModel(ChampionRepository(app)) }
 
         adapter =ChampionAdapter(viewModel::onChampionClick)
         binding.championListView.adapter = adapter
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(){
         viewModel.navigation.observe(this, Observer { event->
             event.getContentIfNotHandled()?.let {
                 startActivity<DetailActivity>{
-                    putExtra(DetailActivity.CHAMPION, it)
+                    putExtra(DetailActivity.CHAMPION, it.id)
                 }
             }
         })
@@ -54,5 +56,8 @@ class MainActivity : AppCompatActivity(){
         }
     }
 }
+
+val Context.app: ChampionApp
+    get() = applicationContext as ChampionApp
 
 
