@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="1dp"
-    android:layout_marginEnd="1dp"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/champion_image"
+    <data>
+        <variable
+            name="champion"
+            type="com.example.leagueoflegendschampions.module.database.Champion" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_android_black"
-        />
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/champion_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/purple_200"
-        android:padding="8dp"
-        android:lines="2"
-        android:minLines="2"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:text="@string/champion_name"/>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/champion_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            app:url="@{champion.square}"
+            app:override="@{400}"
+            android:src="@drawable/ic_android_black" />
+
+        <TextView
+            android:id="@+id/champion_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_200"
+            android:padding="8dp"
+            android:lines="2"
+            android:minLines="2"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:text="@{champion.id}"
+            tools:text="@string/champion_name"/>
+    </LinearLayout>
+</layout>

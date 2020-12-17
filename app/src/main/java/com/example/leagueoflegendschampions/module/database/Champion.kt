@@ -21,5 +21,6 @@ data class Champion(
         val tags: List<String>,
         @TypeConverters(StatsConverter::class)
         val stats: Map<String, Double>,
+        val splash :String,
         val favorite: Boolean
 )

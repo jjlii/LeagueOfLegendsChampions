@@ -1,15 +1,12 @@
 package com.example.leagueoflegendschampions.ui.main
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.leagueoflegendschampions.ui.commun.BaseURL.SQUARE_BASE_URL
 import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ChampionItemBinding
-import com.example.leagueoflegendschampions.ui.commun.inflate
-import com.example.leagueoflegendschampions.ui.commun.loadUrl
 import com.example.leagueoflegendschampions.module.database.Champion
+import com.example.leagueoflegendschampions.ui.commun.bindingInflate
 import kotlin.properties.Delegates
 
 class ChampionAdapter(private val listener: (Champion)-> Unit )
@@ -28,14 +25,12 @@ class ChampionAdapter(private val listener: (Champion)-> Unit )
         }).dispatchUpdatesTo(this)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.champion_item, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(parent.bindingInflate(R.layout.champion_item, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val champion = championList[position]
-        holder.bind(champion)
+        holder.dataBinding.champion = champion
         holder.itemView.setOnClickListener {
             listener(champion)
         }
@@ -44,13 +39,5 @@ class ChampionAdapter(private val listener: (Champion)-> Unit )
     override fun getItemCount(): Int =
         championList.size
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val binding = ChampionItemBinding.bind(view)
-        fun bind(champion: Champion){
-            with(binding){
-                championName.text = champion.name
-                championImage.loadUrl(SQUARE_BASE_URL+champion.square, 400)
-            }
-        }
-    }
+    inner class ViewHolder(val dataBinding: ChampionItemBinding) : RecyclerView.ViewHolder(dataBinding.root)
 }

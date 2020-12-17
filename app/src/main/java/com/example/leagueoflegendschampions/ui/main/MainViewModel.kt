@@ -6,42 +6,37 @@ import com.example.leagueoflegendschampions.module.database.Champion
 import com.example.leagueoflegendschampions.module.server.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.Event
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
-import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val championRepository: ChampionRepository):
     ScopedViewModel() {
 
-    sealed class UiModel{
-        object Loading : UiModel()
-        class Content(val champions : List<Champion>) : UiModel()
-        object RequestLocationPermission : UiModel()
-    }
+    private val _champions = MutableLiveData<List<Champion>>()
+    val champions: LiveData<List<Champion>> get() = _champions
 
-    private val _navigation = MutableLiveData<Event<Champion>>()
-    val navigation: LiveData<Event<Champion>> = _navigation
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> get() = _loading
 
-    private val _model = MutableLiveData<UiModel>()
-    val model: LiveData<UiModel>
-        get(){
-            if (_model.value ==null)
-                refresh()
-            return _model
-        }
+    private val _requestLocationPermission = MutableLiveData<Event<Unit>>()
+    val requestLocationPermission: LiveData<Event<Unit>> get() = _requestLocationPermission
+
+    private val _navigation = MutableLiveData<Event<String>>()
+    val navigation: LiveData<Event<String>> = _navigation
 
     init {
         initScope()
+        refresh()
     }
 
     private fun refresh(){
-        _model.value = RequestLocationPermission
+        _requestLocationPermission.value = Event(Unit)
     }
 
     fun onCoarsePermissionRequested() {
         launch {
-            _model.value = Loading
-            val championList = championRepository.getChampions()
-            _model.value = Content(championList)
+            _loading.value = true
+            _champions.value = championRepository.getChampions()
+            _loading.value = false
         }
     }
 
@@ -51,6 +46,6 @@ class MainViewModel(private val championRepository: ChampionRepository):
     }
 
     fun onChampionClick(champion: Champion) {
-        _navigation.value = Event(champion)
+        _navigation.value = Event(champion.id)
     }
 }

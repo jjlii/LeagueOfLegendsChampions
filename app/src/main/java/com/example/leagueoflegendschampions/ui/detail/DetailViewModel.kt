@@ -10,26 +10,43 @@ import kotlinx.coroutines.launch
 class DetailViewModel(private val championId: String,
                       private val championRepository: ChampionRepository): ScopedViewModel() {
 
-    class UiModel(val champion: Champion)
+    private val _champion = MutableLiveData<Champion>()
+    val champion: LiveData<Champion> get() = _champion
 
-    private val _model = MutableLiveData<UiModel>()
-    val model: LiveData<UiModel>
-        get() {
-            if (_model.value == null)
-                findChampion()
-            return _model
+    private val _title = MutableLiveData<String>()
+    val title: LiveData<String> get() = _title
+
+    private val _summary = MutableLiveData<String>()
+    val summary: LiveData<String> get() = _summary
+
+    private val _splash = MutableLiveData<String>()
+    val splash: LiveData<String> get() = _splash
+
+    private val _favorite = MutableLiveData<Boolean>()
+    val favorite: LiveData<Boolean> get() = _favorite
+
+    init {
+        launch {
+            _champion.value = championRepository.findChampionById(championId)
+            updateUi()
         }
-
-    private fun findChampion() =
-            launch{
-                _model.value = UiModel(championRepository.findChampionById(championId))
-            }
+    }
 
     fun onFavoriteClicked() = launch {
-        _model.value?.champion?.let {
+        champion.value?.let {
             val updatedChampion = it.copy(favorite = !it.favorite)
-            _model.value = UiModel(updatedChampion)
+            _champion.value = updatedChampion
+            updateUi()
             championRepository.updateChampion(updatedChampion)
+        }
+    }
+
+    private fun updateUi(){
+        champion.value?.run {
+            _title.value = title
+            _summary.value = blurb
+            _splash.value = splash
+            _favorite.value = favorite
         }
     }
 }

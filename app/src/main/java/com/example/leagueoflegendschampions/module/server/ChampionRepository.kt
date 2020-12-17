@@ -3,6 +3,7 @@ package com.example.leagueoflegendschampions.module.server
 import com.example.leagueoflegendschampions.ChampionApp
 import com.example.leagueoflegendschampions.module.Language
 import com.example.leagueoflegendschampions.module.RegionRepository
+import com.example.leagueoflegendschampions.ui.commun.BaseURL
 import com.example.leagueoflegendschampions.module.server.Champion as ServerChampion
 import com.example.leagueoflegendschampions.module.database.Champion as DbChampion
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +39,7 @@ class ChampionRepository(application: ChampionApp) {
 private fun ServerChampion.convertToDbChampion() = DbChampion(
         id = id,
         name = name,
-        square = image.full,
+        square = BaseURL.SQUARE_BASE_URL + image.full,
         blurb = blurb,
         title = title,
         partype = partype,
@@ -48,5 +49,6 @@ private fun ServerChampion.convertToDbChampion() = DbChampion(
         difficulty = info.difficulty,
         tags = tags,
         stats = stats,
+        splash = BaseURL.SPLASH_BASE_URL + id + "_0.jpg",
         favorite = false
 )
