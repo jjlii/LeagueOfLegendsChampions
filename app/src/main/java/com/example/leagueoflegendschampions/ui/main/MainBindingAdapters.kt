@@ -2,7 +2,7 @@ package com.example.leagueoflegendschampions.ui.main
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.leagueoflegendschampions.module.database.Champion
+import com.example.domain.Champion
 
 @BindingAdapter("items")
 fun RecyclerView.setItems(champions: List<Champion>?){

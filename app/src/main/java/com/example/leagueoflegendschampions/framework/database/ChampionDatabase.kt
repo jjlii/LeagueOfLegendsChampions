@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.module.database
+package com.example.leagueoflegendschampions.framework.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
