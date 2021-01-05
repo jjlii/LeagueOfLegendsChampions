@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.module.server
+package com.example.leagueoflegendschampions.framework.server
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

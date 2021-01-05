@@ -2,13 +2,13 @@ package com.example.leagueoflegendschampions.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.leagueoflegendschampions.module.database.Champion
-import com.example.leagueoflegendschampions.module.server.ChampionRepository
+import com.example.domain.Champion
 import com.example.leagueoflegendschampions.ui.commun.Event
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
+import com.example.usecases.GetChampionsUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val championRepository: ChampionRepository):
+class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase):
     ScopedViewModel() {
 
     private val _champions = MutableLiveData<List<Champion>>()
@@ -35,7 +35,7 @@ class MainViewModel(private val championRepository: ChampionRepository):
     fun onCoarsePermissionRequested() {
         launch {
             _loading.value = true
-            _champions.value = championRepository.getChampions()
+            _champions.value = getChampionsUseCase.invoke()
             _loading.value = false
         }
     }

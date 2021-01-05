@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions
+package com.example.leagueoflegendschampions.ui.commun
 
 import android.app.Activity
 import com.karumi.dexter.Dexter

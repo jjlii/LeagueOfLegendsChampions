@@ -4,15 +4,21 @@ import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.leagueoflegendschampions.PermissionRequester
+import com.example.data.repository.ChampionRepository
+import com.example.data.repository.RegionRepository
+import com.example.leagueoflegendschampions.ui.commun.PermissionRequester
 import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ActivityMainBinding
-import com.example.leagueoflegendschampions.module.server.ChampionRepository
+import com.example.leagueoflegendschampions.framework.AndroidPermissionChecker
+import com.example.leagueoflegendschampions.framework.PlayServicesLocationDataSource
+import com.example.leagueoflegendschampions.framework.database.RoomDadaSource
+import com.example.leagueoflegendschampions.framework.server.ChampionDataSource
 import com.example.leagueoflegendschampions.ui.commun.EventObserver
 import com.example.leagueoflegendschampions.ui.commun.app
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.startActivity
 import com.example.leagueoflegendschampions.ui.detail.DetailActivity
+import com.example.usecases.GetChampionsUseCase
 
 class MainActivity : AppCompatActivity(){
 
@@ -25,7 +31,13 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewModel = getViewModel { MainViewModel(ChampionRepository(app)) }
+        viewModel = getViewModel { MainViewModel(
+            GetChampionsUseCase(ChampionRepository(ChampionDataSource()
+                , RoomDadaSource(app.db)
+                , RegionRepository(PlayServicesLocationDataSource(app)
+                    , AndroidPermissionChecker(app))
+            ))
+        ) }
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="champion"
-            type="com.example.leagueoflegendschampions.module.database.Champion" />
+            type="com.example.domain.Champion" />
     </data>
 
     <LinearLayout

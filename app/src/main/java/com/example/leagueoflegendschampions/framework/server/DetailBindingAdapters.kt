@@ -1,12 +1,12 @@
-package com.example.leagueoflegendschampions.module.server
+package com.example.leagueoflegendschampions.framework.server
 
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.databinding.BindingAdapter
+import com.example.domain.Champion
 import com.example.leagueoflegendschampions.R
-import com.example.leagueoflegendschampions.module.database.Champion
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 @BindingAdapter("champion")

@@ -3,9 +3,9 @@ package com.example.leagueoflegendschampions.ui.main
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.Champion
 import com.example.leagueoflegendschampions.R
 import com.example.leagueoflegendschampions.databinding.ChampionItemBinding
-import com.example.leagueoflegendschampions.module.database.Champion
 import com.example.leagueoflegendschampions.ui.commun.bindingInflate
 import kotlin.properties.Delegates
 

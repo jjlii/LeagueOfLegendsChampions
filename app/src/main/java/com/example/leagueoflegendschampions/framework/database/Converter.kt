@@ -1,8 +1,7 @@
-package com.example.leagueoflegendschampions.module.database
+package com.example.leagueoflegendschampions.framework.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 
 object StatsConverter {
