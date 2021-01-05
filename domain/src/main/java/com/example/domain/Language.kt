@@ -1,4 +1,4 @@
-package com.example.leagueoflegendschampions.module
+package com.example.domain
 
 class Language {
 

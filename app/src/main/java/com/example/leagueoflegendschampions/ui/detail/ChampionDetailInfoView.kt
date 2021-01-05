@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
-import com.example.leagueoflegendschampions.module.database.Champion
+import com.example.domain.Champion
 
 class ChampionDetailInfoView @JvmOverloads constructor(
         context: Context,

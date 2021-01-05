@@ -2,7 +2,7 @@ package com.example.leagueoflegendschampions
 
 import android.app.Application
 import androidx.room.Room
-import com.example.leagueoflegendschampions.module.database.ChampionDatabase
+import com.example.leagueoflegendschampions.data.database.ChampionDatabase
 
 class ChampionApp : Application(){
 

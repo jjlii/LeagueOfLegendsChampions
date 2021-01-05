@@ -9,12 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.example.leagueoflegendschampions.PermissionRequester
+import com.example.data.repository.ChampionRepository
+import com.example.data.repository.RegionRepository
+import com.example.leagueoflegendschampions.data.AndroidPermissionChecker
+import com.example.leagueoflegendschampions.data.PlayServicesLocationDataSource
+import com.example.leagueoflegendschampions.data.database.RoomDataSource
+import com.example.leagueoflegendschampions.data.server.ChampionDbDataSource
+import com.example.leagueoflegendschampions.ui.commun.PermissionRequester
 import com.example.leagueoflegendschampions.databinding.FragmentMainBinding
-import com.example.leagueoflegendschampions.module.server.ChampionRepository
 import com.example.leagueoflegendschampions.ui.commun.EventObserver
 import com.example.leagueoflegendschampions.ui.commun.app
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
+import com.example.usecases.GetChampionsUseCase
 
 
 class MainFragment : Fragment() {
@@ -46,7 +52,18 @@ class MainFragment : Fragment() {
         navController = view.findNavController()
 
         viewModel = getViewModel {
-            MainViewModel(ChampionRepository(app))
+            MainViewModel(
+                    GetChampionsUseCase(
+                            ChampionRepository(
+                                    RegionRepository(
+                                            PlayServicesLocationDataSource(app),
+                                            AndroidPermissionChecker(app)
+                                    ),
+                                    RoomDataSource(app.db),
+                                    ChampionDbDataSource()
+                            )
+                    )
+            )
         }
 
         adapter = ChampionAdapter(viewModel::onChampionClick)
