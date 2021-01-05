@@ -2,13 +2,15 @@ package com.example.leagueoflegendschampions.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.leagueoflegendschampions.module.database.Champion
-import com.example.leagueoflegendschampions.module.server.ChampionRepository
+import com.example.domain.Champion
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
+import com.example.usecases.FindChampionByIdUseCase
+import com.example.usecases.ToggleChampionFavoriteUseCase
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val championId: String,
-                      private val championRepository: ChampionRepository): ScopedViewModel() {
+                      private val findChampionByIdUseCase: FindChampionByIdUseCase,
+                      private val toggleChampionFavoriteUseCase: ToggleChampionFavoriteUseCase): ScopedViewModel() {
 
     class UiModel(val champion: Champion)
 
@@ -22,14 +24,14 @@ class DetailViewModel(private val championId: String,
 
     private fun findChampion() =
             launch{
-                _model.value = UiModel(championRepository.findChampionById(championId))
+                _model.value = UiModel(
+                        findChampionByIdUseCase.invoke(championId)
+                )
             }
 
     fun onFavoriteClicked() = launch {
         _model.value?.champion?.let {
-            val updatedChampion = it.copy(favorite = !it.favorite)
-            _model.value = UiModel(updatedChampion)
-            championRepository.updateChampion(updatedChampion)
+            _model.value = UiModel(toggleChampionFavoriteUseCase.invoke(it))
         }
     }
 }
