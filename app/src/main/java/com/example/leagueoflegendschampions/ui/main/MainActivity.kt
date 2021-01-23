@@ -22,7 +22,9 @@ import com.example.usecases.GetChampionsUseCase
 
 class MainActivity : AppCompatActivity(){
 
-    private lateinit var viewModel: MainViewModel
+    private  val viewModel: MainViewModel by lazy {
+        getViewModel { app.component.mainViewModel }
+    }
     private lateinit var binding : ActivityMainBinding
     private lateinit var adapter : ChampionAdapter
     private val coarsePermissionRequester = PermissionRequester(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -30,14 +32,6 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        viewModel = getViewModel { MainViewModel(
-            GetChampionsUseCase(ChampionRepository(ChampionDataSource()
-                , RoomDadaSource(app.db)
-                , RegionRepository(PlayServicesLocationDataSource(app)
-                    , AndroidPermissionChecker(app))
-            ))
-        ) }
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this

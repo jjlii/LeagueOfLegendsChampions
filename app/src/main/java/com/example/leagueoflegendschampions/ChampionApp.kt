@@ -1,20 +1,21 @@
 package com.example.leagueoflegendschampions
 
 import android.app.Application
-import androidx.room.Room
-import com.example.leagueoflegendschampions.framework.database.ChampionDatabase
+import com.example.leagueoflegendschampions.di.ChampionsComponent
+import com.example.leagueoflegendschampions.di.DaggerChampionsComponent
 
 class ChampionApp : Application(){
 
-    lateinit var db : ChampionDatabase
+    lateinit var component: ChampionsComponent
         private set
+
+
 
     override fun onCreate() {
         super.onCreate()
 
-        db = Room.databaseBuilder(
-                this,
-                ChampionDatabase::class.java, "champion-db"
-        ).build()
+        component = DaggerChampionsComponent
+                .factory()
+                .create(this)
     }
 }

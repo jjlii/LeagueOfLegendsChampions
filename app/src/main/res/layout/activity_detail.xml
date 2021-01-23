@@ -42,7 +42,7 @@
                     android:id="@+id/championDetailToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:title="@{viewmodel.champion.id}" />
+                    app:title="@{viewmodel.title}" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

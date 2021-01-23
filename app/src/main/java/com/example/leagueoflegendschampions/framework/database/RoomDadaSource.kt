@@ -7,7 +7,7 @@ import com.example.leagueoflegendschampions.framework.toDomainChampion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class RoomDadaSource(private val championDatabase: ChampionDatabase) : LocalDataSource{
+class RoomDadaSource(championDatabase: ChampionDatabase) : LocalDataSource{
 
     private val championsDao = championDatabase.championDao()
 
