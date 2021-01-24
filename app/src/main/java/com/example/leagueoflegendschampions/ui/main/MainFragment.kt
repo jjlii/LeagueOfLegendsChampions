@@ -25,7 +25,11 @@ import com.example.usecases.GetChampionsUseCase
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy {
+        getViewModel {
+            app.component.mainViewModel
+        }
+    }
     private var binding: FragmentMainBinding? = null
     private lateinit var adapter: ChampionAdapter
 
@@ -50,21 +54,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = view.findNavController()
-
-        viewModel = getViewModel {
-            MainViewModel(
-                    GetChampionsUseCase(
-                            ChampionRepository(
-                                    RegionRepository(
-                                            PlayServicesLocationDataSource(app),
-                                            AndroidPermissionChecker(app)
-                                    ),
-                                    RoomDataSource(app.db),
-                                    ChampionDbDataSource()
-                            )
-                    )
-            )
-        }
 
         adapter = ChampionAdapter(viewModel::onChampionClick)
         binding?.championListView?.adapter = adapter

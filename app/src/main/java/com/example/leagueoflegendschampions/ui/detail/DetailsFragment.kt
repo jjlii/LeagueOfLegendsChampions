@@ -26,7 +26,12 @@ import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
 
-    private lateinit var viewModel: DetailViewModel
+    private val viewModel: DetailViewModel by lazy{
+        getViewModel {
+            app.component.detailViewModel
+        }
+    }
+
     private var binding: FragmentDetailsBinding? = null
     private val args: DetailsFragmentArgs by navArgs()
 
@@ -41,17 +46,6 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val championRepository = ChampionRepository(
-                RegionRepository(PlayServicesLocationDataSource(app),
-                        AndroidPermissionChecker(app)),
-                RoomDataSource(app.db),
-                ChampionDbDataSource()
-        )
-
-        viewModel = getViewModel { DetailViewModel(
-            args.id, FindChampionByIdUseCase(championRepository),
-                ToggleChampionFavoriteUseCase(championRepository))
-        }
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::updateUi))
 
