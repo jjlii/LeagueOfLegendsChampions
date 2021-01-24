@@ -14,15 +14,19 @@ class DetailActivity : AppCompatActivity() {
         const val CHAMPION = "DetailActivity:champion"
     }
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var component: DetailActivityComponent
     private val  viewModel: DetailViewModel by lazy {
-        getViewModel { app.component.detailViewModel }
+        getViewModel { component.detailViewModel }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        component = app.component.plus(DetailActivityModule(intent.getStringExtra(CHAMPION) ?: ""))
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
+
 
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
+
     }
 }

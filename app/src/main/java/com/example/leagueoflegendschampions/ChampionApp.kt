@@ -2,7 +2,6 @@ package com.example.leagueoflegendschampions
 
 import android.app.Application
 import com.example.leagueoflegendschampions.di.ChampionsComponent
-import com.example.leagueoflegendschampions.di.DaggerChampionsComponent
 
 class ChampionApp : Application(){
 
@@ -14,8 +13,6 @@ class ChampionApp : Application(){
     override fun onCreate() {
         super.onCreate()
 
-        component = DaggerChampionsComponent
-                .factory()
-                .create(this)
+
     }
 }

@@ -22,8 +22,10 @@ import com.example.usecases.GetChampionsUseCase
 
 class MainActivity : AppCompatActivity(){
 
-    private  val viewModel: MainViewModel by lazy {
-        getViewModel { app.component.mainViewModel }
+
+    private lateinit var component: MainActivityComponent
+    private val viewModel: MainViewModel by lazy {
+        getViewModel { component.mainViewModel }
     }
     private lateinit var binding : ActivityMainBinding
     private lateinit var adapter : ChampionAdapter
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        component = app.component.plus(MainActivityModule())
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.viewmodel = viewModel
@@ -38,7 +41,6 @@ class MainActivity : AppCompatActivity(){
 
         adapter =ChampionAdapter(viewModel::onChampionClick)
         binding.championListView.adapter = adapter
-
         viewModel.navigation.observe(this, EventObserver { id->
             startActivity<DetailActivity>{
                 putExtra(DetailActivity.CHAMPION, id)
