@@ -8,30 +8,23 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import com.example.data.repository.ChampionRepository
-import com.example.data.repository.RegionRepository
 import com.example.leagueoflegendschampions.R
-import com.example.leagueoflegendschampions.data.AndroidPermissionChecker
-import com.example.leagueoflegendschampions.data.PlayServicesLocationDataSource
-import com.example.leagueoflegendschampions.data.database.RoomDataSource
-import com.example.leagueoflegendschampions.data.server.ChampionDbDataSource
 import com.example.leagueoflegendschampions.databinding.FragmentDetailsBinding
 import com.example.leagueoflegendschampions.ui.commun.BaseURL
 import com.example.leagueoflegendschampions.ui.commun.app
 import com.example.leagueoflegendschampions.ui.commun.getViewModel
 import com.example.leagueoflegendschampions.ui.commun.loadUrl
-import com.example.usecases.FindChampionByIdUseCase
-import com.example.usecases.ToggleChampionFavoriteUseCase
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
 
     private val viewModel: DetailViewModel by lazy{
         getViewModel {
-            app.component.detailViewModel
+            component.detailViewModel
         }
     }
 
+    private lateinit var component: DetailFragmentComponent
     private var binding: FragmentDetailsBinding? = null
     private val args: DetailsFragmentArgs by navArgs()
 
@@ -46,7 +39,7 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        component = app.component.plus(DetailFragmentModule(args.id))
         viewModel.model.observe(viewLifecycleOwner, Observer(::updateUi))
 
         binding?.championDetailFavorite?.setOnClickListener {

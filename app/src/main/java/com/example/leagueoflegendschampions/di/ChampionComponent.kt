@@ -1,18 +1,20 @@
 package com.example.leagueoflegendschampions.di
 
 import android.app.Application
-import com.example.leagueoflegendschampions.ui.detail.DetailViewModel
-import com.example.leagueoflegendschampions.ui.main.MainViewModel
+import com.example.leagueoflegendschampions.ui.detail.DetailFragmentComponent
+import com.example.leagueoflegendschampions.ui.detail.DetailFragmentModule
+import com.example.leagueoflegendschampions.ui.main.MainFragmentComponent
+import com.example.leagueoflegendschampions.ui.main.MainFragmentModule
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, DataModule::class, UseCaseModule::class, ViewModelModule::class])
+@Component(modules = [AppModule::class, DataModule::class])
 interface ChampionComponent {
 
-    val mainViewModel : MainViewModel
-    val detailViewModel : DetailViewModel
+    fun plus(mainActivityModule: MainFragmentModule) : MainFragmentComponent
+    fun plus(detailFragmentModule: DetailFragmentModule) : DetailFragmentComponent
 
     @Component.Factory
     interface Factory{
