@@ -15,9 +15,6 @@ class DetailViewModel(private val championId: String,
     private val _champion = MutableLiveData<Champion>()
     val champion: LiveData<Champion> get() = _champion
 
-    private val _title = MutableLiveData<String>()
-    val title: LiveData<String> get() = _title
-
     private val _summary = MutableLiveData<String>()
     val summary: LiveData<String> get() = _summary
 
@@ -42,7 +39,6 @@ class DetailViewModel(private val championId: String,
 
     private fun updateUi(){
         champion.value?.run {
-            _title.value = title
             _summary.value = blurb
             _splash.value = splash
             _favorite.value = favorite
