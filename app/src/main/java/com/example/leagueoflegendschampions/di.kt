@@ -19,6 +19,8 @@ import com.example.leagueoflegendschampions.ui.main.MainViewModel
 import com.example.usecases.FindChampionByIdUseCase
 import com.example.usecases.GetChampionsUseCase
 import com.example.usecases.ToggleChampionFavoriteUseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -31,7 +33,6 @@ fun Application.initDI(){
         androidLogger()
         androidContext(this@initDI)
         modules(listOf(appModule, dataModule, scopeModule))
-        //modules(listOf(appModule, dataModule))
     }
 }
 
@@ -42,28 +43,21 @@ private val dataModule = module {
 
 private val appModule = module {
     single { ChampionDatabase.build(get()) }
+    single<CoroutineDispatcher> { Dispatchers.Main }
     factory <LocalDataSource>{ RoomDataSource(get()) }
     factory <RemoteDataSource>{ ChampionDbDataSource() }
     factory <LocationDataSource>{ PlayServicesLocationDataSource(get()) }
     factory <PermissionChecker>{ AndroidPermissionChecker(get()) }
-
-    /*
-    viewModel { MainViewModel(get()) }
-    factory { GetChampionsUseCase(get()) }
-    viewModel { (id: String ) ->DetailViewModel(id, get(), get()) }
-    factory { FindChampionByIdUseCase(get()) }
-    factory { ToggleChampionFavoriteUseCase(get()) }
-     */
 }
 
 private val scopeModule = module {
     scope(named<MainFragment>()){
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         scoped { GetChampionsUseCase(get()) }
     }
 
     scope(named<DetailsFragment>()){
-        viewModel { (id: String ) ->DetailViewModel(id, get(), get()) }
+        viewModel { (id: String ) ->DetailViewModel(id, get(), get(), get()) }
         scoped { FindChampionByIdUseCase(get()) }
         scoped { ToggleChampionFavoriteUseCase(get()) }
     }

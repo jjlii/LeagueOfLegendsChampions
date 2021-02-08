@@ -7,14 +7,17 @@ import com.example.leagueoflegendschampions.ui.commun.Event
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
 import com.example.leagueoflegendschampions.ui.main.MainViewModel.UiModel.*
 import com.example.usecases.GetChampionsUseCase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase):
-    ScopedViewModel() {
+class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase
+                    , uiDispatcher: CoroutineDispatcher):
+    ScopedViewModel(uiDispatcher) {
 
     sealed class UiModel{
         object Loading : UiModel()
-        class Content(val champions : List<Champion>) : UiModel()
+        data class Content(val champions : List<Champion>) : UiModel()
         object RequestLocationPermission : UiModel()
     }
 
@@ -40,7 +43,7 @@ class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase):
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = Loading
-            val championList = getChampionsUseCase.invoke()
+            val championList =getChampionsUseCase.invoke()
             _model.value = Content(championList)
         }
     }

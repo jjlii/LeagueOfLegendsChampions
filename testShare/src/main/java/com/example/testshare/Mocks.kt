@@ -1,8 +1,8 @@
-package com.example.usecases
+package com.example.testshare
 
 import com.example.domain.Champion
 
-internal val mockedChampion = Champion(
+val mockedChampion = Champion(
         id = "",
         name = "",
         square = "",

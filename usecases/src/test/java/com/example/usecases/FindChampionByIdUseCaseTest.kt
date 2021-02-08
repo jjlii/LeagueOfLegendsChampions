@@ -1,6 +1,7 @@
 package com.example.usecases
 
 import com.example.data.repository.ChampionRepository
+import com.example.testshare.mockedChampion
 import com.nhaarman.mockitokotlin2.capture
 import com.nhaarman.mockitokotlin2.whenever
 import junit.framework.TestCase.assertEquals

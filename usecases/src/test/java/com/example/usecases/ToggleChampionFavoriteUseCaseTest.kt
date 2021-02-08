@@ -1,6 +1,7 @@
 package com.example.usecases
 
 import com.example.data.repository.ChampionRepository
+import com.example.testshare.mockedChampion
 import com.nhaarman.mockitokotlin2.verify
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
