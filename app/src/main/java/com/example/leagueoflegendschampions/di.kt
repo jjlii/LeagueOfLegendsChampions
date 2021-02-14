@@ -36,7 +36,7 @@ fun Application.initDI(){
     }
 }
 
-private val dataModule = module {
+val dataModule = module {
     factory { ChampionRepository(get(), get(), get()) }
     factory { RegionRepository(get(), get()) }
 }
