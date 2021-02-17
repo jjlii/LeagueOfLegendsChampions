@@ -12,6 +12,8 @@ import com.example.leagueoflegendschampions.data.PlayServicesLocationDataSource
 import com.example.leagueoflegendschampions.data.database.ChampionDatabase
 import com.example.leagueoflegendschampions.data.database.RoomDataSource
 import com.example.leagueoflegendschampions.data.server.ChampionDbDataSource
+import com.example.leagueoflegendschampions.data.server.ChampionsDb
+import com.example.leagueoflegendschampions.ui.commun.BaseURL.API_BASE_URL
 import com.example.leagueoflegendschampions.ui.detail.DetailViewModel
 import com.example.leagueoflegendschampions.ui.detail.DetailsFragment
 import com.example.leagueoflegendschampions.ui.main.MainFragment
@@ -45,9 +47,11 @@ private val appModule = module {
     single { ChampionDatabase.build(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
     factory <LocalDataSource>{ RoomDataSource(get()) }
-    factory <RemoteDataSource>{ ChampionDbDataSource() }
+    factory <RemoteDataSource>{ ChampionDbDataSource(get()) }
     factory <LocationDataSource>{ PlayServicesLocationDataSource(get()) }
     factory <PermissionChecker>{ AndroidPermissionChecker(get()) }
+    single (named("baseUrl")){API_BASE_URL}
+    single { ChampionsDb(get(named("baseUrl"))) }
 }
 
 private val scopeModule = module {

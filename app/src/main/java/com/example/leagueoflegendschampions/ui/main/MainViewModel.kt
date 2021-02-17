@@ -43,8 +43,7 @@ class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = Loading
-            val championList =getChampionsUseCase.invoke()
-            _model.value = Content(championList)
+            _model.value = Content(getChampionsUseCase.invoke())
         }
     }
 
