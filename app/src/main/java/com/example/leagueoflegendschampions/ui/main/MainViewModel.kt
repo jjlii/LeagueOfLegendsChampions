@@ -2,6 +2,8 @@ package com.example.leagueoflegendschampions.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.example.domain.Champion
 import com.example.leagueoflegendschampions.ui.commun.Event
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
@@ -24,6 +26,8 @@ class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase
     private val _navigation = MutableLiveData<Event<Champion>>()
     val navigation: LiveData<Event<Champion>> = _navigation
 
+    private val idlingResource = CountingIdlingResource("champion request")
+
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
         get(){
@@ -33,6 +37,7 @@ class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase
         }
 
     init {
+        IdlingRegistry.getInstance().register(idlingResource)
         initScope()
     }
 
@@ -43,12 +48,15 @@ class MainViewModel(private val getChampionsUseCase: GetChampionsUseCase
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = Loading
+            idlingResource.increment()
             _model.value = Content(getChampionsUseCase.invoke())
+            idlingResource.decrement()
         }
     }
 
     override fun onCleared() {
         cancelScope()
+        IdlingRegistry.getInstance().unregister(idlingResource)
         super.onCleared()
     }
 

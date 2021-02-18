@@ -67,13 +67,15 @@ allprojects {
         okhttpLoggingInterceptorVersion = '4.9.0'
         retrofitVersion = '2.9.0'
         retrofitConverterGsonVersion = '2.9.0'
-        koinVersion = "2.2.0-rc-4"
+        koinVersion = '2.2.0-rc-4'
+        espressoIdlingVersion = '3.3.0'
 
         libs = [
                 okhttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion",
                 retrofit: "com.squareup.retrofit2:retrofit:$retrofitVersion",
                 retrofitConverterGson: "com.squareup.retrofit2:converter-gson:$retrofitConverterGsonVersion",
-                koin: "org.koin:koin-androidx-viewmodel:$koinVersion"
+                koin: "org.koin:koin-androidx-viewmodel:$koinVersion",
+                espressoIdling: "androidx.test.espresso:espresso-idling-resource:$espressoIdlingVersion"
         ]
 
         junitVersion = '4.13.1'

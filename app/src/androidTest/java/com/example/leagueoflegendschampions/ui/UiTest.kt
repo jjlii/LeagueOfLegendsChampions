@@ -47,7 +47,6 @@ class UiTest : KoinTest {
 
     @Test
     fun clickAChampionNavigateToDetail() {
-        onView(withId(R.id.progress)).check(matches(isDisplayed()))
         onView(
             withId(R.id.championListView)
         ).perform(
