@@ -1,9 +1,9 @@
 package com.example.data.repository
 
-import com.example.domain.Language.Companion.getLanguage
 import com.example.data.source.LocalDataSource
 import com.example.data.source.RemoteDataSource
 import com.example.domain.Champion
+import com.example.domain.getLanguage
 
 class ChampionRepository(
         private val repository: RegionRepository,
@@ -12,7 +12,10 @@ class ChampionRepository(
 ) {
     suspend fun getChampions(): List<Champion>{
         if (localDataSource.championCount()<=0){
-            val champions = remoteDataSource.listChampionsAsync(getLanguage(repository.findLastRegion()))
+            val languages = remoteDataSource.languagesAsync()
+            val champions = remoteDataSource.listChampionsAsync(
+                getLanguage(repository.findLastRegion(), languages)
+            )
             localDataSource.insertChampion(champions)
         }
         return localDataSource.getAllChampions()

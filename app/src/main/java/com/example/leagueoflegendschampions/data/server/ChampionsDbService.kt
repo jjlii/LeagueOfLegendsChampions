@@ -5,8 +5,11 @@ import retrofit2.http.Path
 
 interface ChampionsDbService {
 
-    @GET("{language}/champion.json")
+    @GET("10.23.1/data/{language}/champion.json")
     suspend fun listChampionsAsync(@Path("language") language: String = "en_US"): ChampionDbResult
+
+    @GET("languages.json")
+    suspend fun languageAsync(): List<String>
 
 
 }

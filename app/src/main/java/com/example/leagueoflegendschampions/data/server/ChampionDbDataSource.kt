@@ -15,4 +15,8 @@ class ChampionDbDataSource(private val championDb: ChampionsDb): RemoteDataSourc
                 it.toDomainChampion()
             }
 
+    override suspend fun languagesAsync(): List<String> = 
+        championDb.service
+            .languageAsync()
+
 }

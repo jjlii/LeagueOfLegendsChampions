@@ -51,8 +51,10 @@ class ChampionRepositoryTest{
     fun `getChampions should return remoteDataSource champions when localDataSource is empty`() {
         runBlocking {
             val championList = listOf(mockedChampion)
+            val languages = listOf("es_ES", "en_US")
             whenever(localDataSource.championCount()).thenReturn(0)
-            whenever(repository.findLastRegion()).thenReturn(region)
+            whenever(repository.findLastRegion()).thenReturn(REGION)
+            whenever(remoteDataSource.languagesAsync()).thenReturn(languages)
             whenever(remoteDataSource.listChampionsAsync(any())).thenReturn(championList)
             whenever(localDataSource.getAllChampions()).thenReturn(championList)
 
@@ -102,6 +104,6 @@ class ChampionRepositoryTest{
     }
 
     companion object{
-        private const val region = "es"
+        private const val REGION = "es"
     }
 }
