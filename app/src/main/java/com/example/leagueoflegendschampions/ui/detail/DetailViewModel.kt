@@ -6,13 +6,15 @@ import com.example.domain.Champion
 import com.example.leagueoflegendschampions.ui.commun.ScopedViewModel
 import com.example.usecases.FindChampionByIdUseCase
 import com.example.usecases.ToggleChampionFavoriteUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class DetailViewModel(private val championId: String,
                       private val findChampionByIdUseCase: FindChampionByIdUseCase,
-                      private val toggleChampionFavoriteUseCase: ToggleChampionFavoriteUseCase): ScopedViewModel() {
+                      private val toggleChampionFavoriteUseCase: ToggleChampionFavoriteUseCase,
+                      uiDispatcher: CoroutineDispatcher): ScopedViewModel(uiDispatcher) {
 
-    class UiModel(val champion: Champion)
+    data class UiModel(val champion: Champion)
 
     private val _model = MutableLiveData<UiModel>()
     val model: LiveData<UiModel>
